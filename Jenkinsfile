@@ -26,7 +26,7 @@ pipeline {
       steps {
         ansiColor('xterm') {
           // Dockerhub
-          sh 'docker tag ${TEMP_IMAGE}-${TAG} docker.io/jc21/${IMAGE}:${TAG}'
+          sh 'docker tag ${TEMP_IMAGE} docker.io/jc21/${IMAGE}:${TAG}'
           withCredentials([usernamePassword(credentialsId: 'jc21-dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {
             sh "docker login -u '${duser}' -p '${dpass}'"
             sh 'docker push docker.io/jc21/${IMAGE}:${TAG}'
