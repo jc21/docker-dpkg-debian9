@@ -11,7 +11,7 @@ RUN apt-get update \
 RUN sed -i '/Defaults    requiretty/c\#Defaults    requiretty' /etc/sudoers
 
 # Rpm User
-RUN adduser -G sudo builder \
+RUN useradd -G sudo builder \
     && mkdir -p /home/builder \
     && chmod -R 777 /home/builder
 
