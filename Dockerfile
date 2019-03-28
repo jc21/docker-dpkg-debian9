@@ -15,6 +15,10 @@ RUN useradd -G sudo builder \
     && mkdir -p /home/builder \
     && chmod -R 777 /home/builder
 
+# Sudo
+ADD etc/sudoers.d/builder /etc/sudoers.d/
+RUN chown root:root /etc/sudoers.d/*
+
 USER builder
 
 WORKDIR /home/builder
