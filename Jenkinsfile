@@ -8,6 +8,7 @@ pipeline {
     IMAGE      = "dpkg-debian"
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
     TAG        = "9"
+    TAG2       = "stretch"
   }
   stages {
     stage('Prepare') {
@@ -27,9 +28,11 @@ pipeline {
         ansiColor('xterm') {
           // Dockerhub
           sh 'docker tag ${TEMP_IMAGE} docker.io/jc21/${IMAGE}:${TAG}'
+          sh 'docker tag ${TEMP_IMAGE} docker.io/jc21/${IMAGE}:${TAG2}'
           withCredentials([usernamePassword(credentialsId: 'jc21-dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {
             sh "docker login -u '${duser}' -p '${dpass}'"
             sh 'docker push docker.io/jc21/${IMAGE}:${TAG}'
+            sh 'docker push docker.io/jc21/${IMAGE}:${TAG2}'
           }
         }
       }
