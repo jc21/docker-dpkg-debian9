@@ -14,6 +14,12 @@ RUN apt-get update \
   && apt-get install -y git \
   && apt-get clean
 
+# Golang
+RUN wget https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz -O /tmp/golang.tar.gz \
+  && tar xvf /tmp/golang.tar.gz \
+  && mv go /usr/local/ \
+  && rm -rf /tmp/golang.tar.gz
+
 # Remove requiretty from sudoers main file
 RUN sed -i '/Defaults    requiretty/c\#Defaults    requiretty' /etc/sudoers
 
@@ -28,5 +34,7 @@ RUN chown root:root /etc/sudoers.d/*
 
 USER builder
 
-WORKDIR /home/builder
+ENV GOROOT=/usr/local/go
+ENV PATH="/usr/local/go/bin:${PATH}"
 
+WORKDIR /home/builder
