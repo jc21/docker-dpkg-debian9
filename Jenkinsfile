@@ -7,9 +7,9 @@ pipeline {
   environment {
     IMAGE      = "dpkg-debian"
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
-    TAG        = "9"
-    TAG2       = "stretch"
-    TAG3       = "latest"
+    TAG        = "9-golang"
+    TAG2       = "stretch-golang"
+    TAG3       = "latest-golang"
   }
   stages {
     stage('Prepare') {
