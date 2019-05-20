@@ -5,7 +5,7 @@ LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 
 # Apt
 RUN apt-get update \
-  && apt-get install -y wget make devscripts build-essential curl automake autoconf expect sudo apt-utils reprepro apt-transport-https \
+  && apt-get install -y wget make devscripts build-essential curl automake autoconf expect sudo apt-utils reprepro apt-transport-https jq \
   && wget https://dpkg.jc21.com/DPKG-GPG-KEY -O /tmp/jc21-dpkg-key \
   && apt-key add /tmp/jc21-dpkg-key \
   && echo "deb https://dpkg.jc21.com/os/debian stretch main" > /etc/apt/sources.list.d/jc21.list
