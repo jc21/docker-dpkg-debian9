@@ -12,9 +12,10 @@ RUN wget "http://ftp.us.debian.org/debian/pool/main/g/golang-1.12/golang-1.12_1.
  && dpkg -i /tmp/golang-1.12_1.12.5-1_all.deb /tmp/golang-1.12-src_1.12.5-1_amd64.deb /tmp/golang-1.12-go_1.12.5-1_amd64.deb /tmp/golang-1.12-doc_1.12.5-1_all.deb \
  && rm -f /tmp/*.deb
 
+USER builder
+
 # installed in /usr/lib/go-1.12
 ENV GOROOT=/usr/lib/go-1.12
-ENV PATH="/usr/lib/go-1.12/bin:${PATH}"
-
-USER builder
+ENV GOPATH=/home/builder/go
+ENV PATH="/usr/lib/go-1.12/bin:/home/builder/go/bin:${PATH}"
 
