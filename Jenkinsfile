@@ -7,20 +7,15 @@ pipeline {
   environment {
     IMAGE      = "dpkg-debian"
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
-    TAG        = "9"
-    TAG2       = "stretch"
-    TAG3       = "latest"
+    TAG        = "9-rust"
+    TAG2       = "stretch-rust"
+    TAG3       = "latest-rust"
   }
   stages {
-    stage('Prepare') {
-      steps {
-        sh 'docker pull debian:9'
-      }
-    }
     stage('Build') {
       steps {
         ansiColor('xterm') {
-          sh 'docker build --no-cache --squash --compress -t ${TEMP_IMAGE} .'
+          sh 'docker build --pull --no-cache --squash --compress -t ${TEMP_IMAGE} .'
         }
       }
     }
