@@ -7,4 +7,4 @@ LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 WORKDIR /home/builder
-
+ENV PATH="/home/builder/.cargo/bin:${PATH}"
