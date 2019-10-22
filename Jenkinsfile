@@ -9,7 +9,6 @@ pipeline {
     TEMP_IMAGE = "${IMAGE}_${BUILD_NUMBER}"
     TAG        = "9-rust"
     TAG2       = "stretch-rust"
-    TAG3       = "latest-rust"
   }
   stages {
     stage('Build') {
@@ -25,16 +24,13 @@ pipeline {
           // Dockerhub
           sh 'docker tag ${TEMP_IMAGE} docker.io/jc21/${IMAGE}:${TAG}'
           sh 'docker tag ${TEMP_IMAGE} docker.io/jc21/${IMAGE}:${TAG2}'
-          sh 'docker tag ${TEMP_IMAGE} docker.io/jc21/${IMAGE}:${TAG3}'
           withCredentials([usernamePassword(credentialsId: 'jc21-dockerhub', passwordVariable: 'dpass', usernameVariable: 'duser')]) {
             sh "docker login -u '${duser}' -p '${dpass}'"
             sh 'docker push docker.io/jc21/${IMAGE}:${TAG}'
             sh 'docker push docker.io/jc21/${IMAGE}:${TAG2}'
-            sh 'docker push docker.io/jc21/${IMAGE}:${TAG3}'
 
             sh 'docker rmi docker.io/jc21/${IMAGE}:${TAG}'
             sh 'docker rmi docker.io/jc21/${IMAGE}:${TAG2}'
-            sh 'docker rmi docker.io/jc21/${IMAGE}:${TAG3}'
           }
         }
       }
