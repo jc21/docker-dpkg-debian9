@@ -8,10 +8,12 @@ RUN apt-get update \
   && apt-get install -y wget make devscripts build-essential curl automake autoconf expect sudo apt-utils reprepro apt-transport-https jq zip dh-make \
   && wget https://dpkg.jc21.com/DPKG-GPG-KEY -O /tmp/jc21-dpkg-key \
   && apt-key add /tmp/jc21-dpkg-key \
-  && echo "deb https://dpkg.jc21.com/os/debian stretch main" > /etc/apt/sources.list.d/jc21.list
+  && echo "deb https://dpkg.jc21.com/os/debian stretch main" > /etc/apt/sources.list.d/jc21.list \
+  && echo "deb http://deb.debian.org/debian stretch-backports main" > /etc/apt/sources.list.d/stretch-backports.list
 
 RUN apt-get update \
   && apt-get install -y git \
+  && apt-get -t stretch-backports install -y debhelper \
   && apt-get clean
 
 # Remove requiretty from sudoers main file
