@@ -17,4 +17,4 @@ USER builder
 # installed in /usr/lib/go-1.13
 ENV GOROOT=/usr/lib/go-1.13
 ENV GOPATH=/home/builder/go
-ENV PATH="/usr/lib/go-1.12/bin:/home/builder/go/bin:${PATH}"
+ENV PATH="/usr/lib/go-1.13/bin:/home/builder/go/bin:${PATH}"
